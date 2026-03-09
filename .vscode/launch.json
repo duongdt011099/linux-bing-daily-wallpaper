@@ -9,8 +9,8 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build",
-      "program": "${workspaceFolder}/bin/Debug/net10.0/BingDailyWallpaper.dll",
-      "args": ["set-resolution", "-H", "1080", "-W", "1920"],
+      "program": "${workspaceFolder}/bin/Debug/net10.0/bwall.dll",
+      "args": ["today"],
       "cwd": "${workspaceFolder}",
       "console": "internalConsole",
       "stopAtEntry": false

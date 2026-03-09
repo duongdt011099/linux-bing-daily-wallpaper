@@ -34,7 +34,7 @@ public class BingWallpaperDownloader : IBingWallpaperDownloader
     var wallpaperResponse = await httpClient.GetAsync(wallpaperUrl);
     wallpaperResponse.EnsureSuccessStatusCode();
 
-    var home = Directory.GetCurrentDirectory();
+    var home = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);;
     var directory = $"{home}/Pictures/Bing Wallpapers";
 
     if (!Directory.Exists(directory))

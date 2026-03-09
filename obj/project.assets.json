@@ -1579,7 +1579,7 @@
     "version": "1.0.0",
     "restore": {
       "projectUniqueName": "/home/duong/Documents/BingDailyWallpaper/BingDailyWallpaper.csproj",
-      "projectName": "BingDailyWallpaper",
+      "projectName": "bwall",
       "projectPath": "/home/duong/Documents/BingDailyWallpaper/BingDailyWallpaper.csproj",
       "packagesPath": "/home/duong/.nuget/packages/",
       "outputPath": "/home/duong/Documents/BingDailyWallpaper/obj/",
