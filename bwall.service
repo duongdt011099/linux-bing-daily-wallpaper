@@ -3,4 +3,4 @@ Description=Bing Wallpaper Downloader
 
 [Service]
 Type=oneshot
-ExecStart=/usr/local/bin/bwall today
+ExecStart=/usr/bin/bwall today
