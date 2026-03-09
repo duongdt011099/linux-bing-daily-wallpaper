@@ -10,7 +10,7 @@ var host = Host.CreateDefaultBuilder(args)
       services.AddHttpClient("Bing", config =>
       {
         config.BaseAddress = new Uri("https://www.bing.com");
-      });
+      }).RemoveAllLoggers();
       services.AddTransient<IBingWallpaperDownloader, BingWallpaperDownloader>();
     })
     .Build();
