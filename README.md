@@ -19,12 +19,12 @@ If you installed the `bwall` binary (AUR) the commands below are available.
 - `bwall --help` — show command help.
 
 ## Current support
-- Arch Linux via the AUR package: `bing-daily-wallpaper`
+- Arch Linux via the AUR package: `linux-bing-daily-wallpaper`
 
 Install (Arch Linux):
 
 ```
-yay -S bing-daily-wallpaper
+yay -S linux-bing-daily-wallpaper
 ```
 
 ## Build from source
@@ -43,16 +43,14 @@ Publish a release build:
 dotnet publish -c Release -o out
 ```
 
-## Systemd (optional)
-This repo includes systemd unit files: [bwall.service](bwall.service) and [bwall.timer](bwall.timer).
-To use them as a user timer, copy the files to `~/.config/systemd/user/` then:
-
+## Enable automatic refresh daily wallpaper
 ```
 systemctl --user daemon-reload
 systemctl --user enable --now bwall.timer
 ```
 
 ## Notes
+- Downloaded wallpapers will be stored in your user home folder: /home/user/Pictures/Bing Wallpapers
 - If you'd like support for other distributions or a packaged release, I can add packaging instructions or CI workflows.
 
 
