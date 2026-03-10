@@ -1,8 +1,8 @@
 ﻿using BingDailyWallpaper.Abstractions;
+using BingDailyWallpaper.Factories;
 using BingWallpaper.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Diagnostics;
 
 var host = Host.CreateDefaultBuilder(args)
     .ConfigureServices(services =>
@@ -25,34 +25,26 @@ var service = host.Services.GetRequiredService<IBingWallpaperDownloader>();
 
 async Task HandleDownload(int idx = 0)
 {
-  var response = await service.DownloadWallpaperAsync(idx);
-  if (response != null)
+  var localPath = await service.DownloadWallpaperAsync(idx);
+  if (localPath != null)
   {
-    var script = $@"var Desktops = desktops();
-        for (i=0;i<Desktops.length;i++) {{
-            d = Desktops[i];
-            d.wallpaperPlugin = ""org.kde.image"";
-            d.currentConfigGroup = Array(""Wallpaper"",""org.kde.image"",""General"");
-            d.writeConfig(""Image"",""file://{response}"");
-        }}";
+    var desktop =
+            Environment.GetEnvironmentVariable("XDG_CURRENT_DESKTOP") ??
+            Environment.GetEnvironmentVariable("XDG_SESSION_DESKTOP") ??
+            Environment.GetEnvironmentVariable("DESKTOP_SESSION");
 
-    var psi = new ProcessStartInfo
+    if (string.IsNullOrEmpty(desktop))
     {
-      FileName = "dbus-send",
-      RedirectStandardOutput = true,
-      RedirectStandardError = true,
-      UseShellExecute = false
-    };
+      Console.WriteLine("Unable to determine desktop environment, defaulting to GNOME.");
+      desktop = "gnome";
+    }
 
-    psi.ArgumentList.Add("--session");
-    psi.ArgumentList.Add("--dest=org.kde.plasmashell");
-    psi.ArgumentList.Add("--type=method_call");
-    psi.ArgumentList.Add("/PlasmaShell");
-    psi.ArgumentList.Add("org.kde.PlasmaShell.evaluateScript");
-    psi.ArgumentList.Add($"string:{script}");
-
-    using var process = Process.Start(psi);
-    process?.WaitForExit();
+    var desktopEnvironment = DesktopEnvironmentFactory.Create(desktop);
+    desktopEnvironment.SetWallpaper(localPath);
+  }
+  else
+  {
+    Console.WriteLine("Failed to download wallpaper.");
   }
 }
 
