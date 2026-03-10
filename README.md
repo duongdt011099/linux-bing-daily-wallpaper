@@ -43,10 +43,7 @@ Publish a release build:
 dotnet publish -c Release -o out
 ```
 
-## Systemd (optional)
-This repo includes systemd unit files: [bwall.service](bwall.service) and [bwall.timer](bwall.timer).
-To use them as a user timer, copy the files to `~/.config/systemd/user/` then:
-
+## Enable automatic refresh daily wallpaper
 ```
 systemctl --user daemon-reload
 systemctl --user enable --now bwall.timer
