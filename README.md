@@ -2,6 +2,11 @@
 
 Small utility to download and set Bing's daily wallpaper on Linux desktops.
 
+## Supported Display Server / Display Protocol
+
+- Wayland
+- X11
+
 ## Supported Desktop Environments
 
 - Cinnamon
